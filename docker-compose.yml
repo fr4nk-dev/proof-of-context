@@ -1,0 +1,16 @@
+version: '3.4'
+
+services:
+  orderdb:
+    image: mcr.microsoft.com/mssql/server:2017-latest
+  orders.api:
+    image: ${DOCKER_REGISTRY-}orderingapi
+    build:
+      context: .
+      dockerfile: Services/Ordering/Ordering.Api/Dockerfile
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.9.2
+  kibana:
+    image: docker.elastic.co/kibana/kibana:7.9.2
+volumes: 
+  elasticsearch-data:
